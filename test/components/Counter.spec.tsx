@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 
-import Counter from '../../src/renderer/components/Counter';
+import PatientForm from '../../src/renderer/components/PatientForm';
 
 describe('Counter component', () => {
     it('renders correctly', () => {

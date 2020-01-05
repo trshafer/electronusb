@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import { CounterState, counterReducer } from './counterReducer';
+import { PatientState, patientReducer } from './patientReducer';
 
 export interface RootState {
-    counter: CounterState;
+    patient: PatientState;
 }
 
 export const rootReducer = combineReducers<RootState | undefined>({
-    counter: counterReducer
+    patient: patientReducer
 });

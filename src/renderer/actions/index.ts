@@ -1,3 +1,3 @@
-import { CounterAction } from './counterActions';
+import { PatientAction } from './patientActions';
 
-export type RootActions = CounterAction[keyof CounterAction];
+export type RootActions = PatientAction[keyof PatientAction];
