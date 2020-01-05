@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PatientForm component renders correctly 1`] = `
+<div
+  className="patient-form"
+>
+  <div>
+    Patient Form
+  </div>
+  <div>
+    <label>
+      Name:
+    </label>
+    <input
+      onChange={[Function]}
+      type="text"
+      value="test"
+    />
+  </div>
+  <div>
+    <label>
+      Weight:
+    </label>
+    <input
+      onChange={[Function]}
+      type="number"
+      value={100}
+    />
+  </div>
+</div>
+`;

@@ -3,7 +3,7 @@ import * as renderer from 'react-test-renderer';
 
 import { PatientForm } from '../../src/renderer/components/PatientForm';
 
-describe('Counter component', () => {
+describe('PatientForm component', () => {
     it('renders correctly', () => {
         const tree = renderer
             .create(

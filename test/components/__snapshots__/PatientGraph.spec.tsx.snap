@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PatientGraph component renders correctly 1`] = `
+<div
+  className="patient-graph"
+>
+  <div>
+    This is where the graph would go.
+  </div>
+  <div>
+    Name:
+    test
+  </div>
+  <div>
+    Weight:
+    100
+  </div>
+</div>
+`;
