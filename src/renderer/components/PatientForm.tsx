@@ -1,27 +1,37 @@
 import * as React from 'react';
 
-require('./Counter.scss');
+require('./PatientForm.scss');
 
 export interface Props {
     readonly name: string;
     readonly weight: number;
 
-    readonly updateName: () => any;
-    readonly updateWeight: () => any;
+    readonly updateName: (name: string) => any;
+    readonly updateWeight: (weight: number) => any;
 }
 
-export const PatientForm: React.FunctionComponent<Props> = ({
-    name,
-    weight,
-    updateName,
-    updateWeight
-}) => (
-    <div className="patient-form">
-        <p>Current name: {name}</p>
-        <p>Current weight: {weight}</p>
-        <p>
-            <button onClick={updateName}>Increment</button>
-            <button onClick={updateWeight}>Decrement</button>
-        </p>
-    </div>
-);
+export class PatientForm extends React.Component<Props> {
+    readonly updateName = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.props.updateName(event.target.value);
+    };
+
+    readonly updateWeight = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.props.updateWeight(Number(event.target.value));
+    };
+
+    render() {
+        return (
+            <div className="patient-form">
+                <div>Patient Form</div>
+                <div>
+                    <label>Name: </label>
+                    <input type="text" value={this.props.name} onChange={this.updateName} />
+                </div>
+                <div>
+                    <label>Weight: </label>
+                    <input type="number" value={this.props.weight} onChange={this.updateWeight} />
+                </div>
+            </div>
+        );
+    }
+}

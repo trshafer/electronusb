@@ -11,11 +11,11 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<PatientAction>) => ({
-    updateName: () => dispatch(updateName()),
-    updateWeight: () => dispatch(updateWeight())
+    updateName: (name: string) => dispatch(updateName(name)),
+    updateWeight: (weight: number) => dispatch(updateWeight(weight))
 });
 
-export const PatientContainer = connect(
+export const PatientFormContainer = connect(
     mapStateToProps,
     mapDispatchToProps
 )(PatientForm);
