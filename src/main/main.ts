@@ -3,9 +3,13 @@ import * as path from 'path';
 import * as url from 'url';
 
 import * as HID from 'node-hid';
+import * as usb from 'usb';
 
-console.log('HELLO1');
+console.log('HID Devices');
 console.log(HID.devices());
+
+console.log('USB Devices');
+console.log(usb.getDeviceList());
 
 let win: BrowserWindow | null;
 
@@ -15,8 +19,8 @@ const installExtensions = async () => {
     const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
     return Promise.all(
-        extensions.map(name => installer.default(installer[name], forceDownload))
-    ).catch(console.log);
+    extensions.map(name => installer.default(installer[name], forceDownload))
+  ).catch(console.log);
 };
 
 const createWindow = async () => {
@@ -37,16 +41,16 @@ const createWindow = async () => {
         win.loadURL(`http://localhost:2003`);
     } else {
         win.loadURL(
-            url.format({
-                pathname: path.join(__dirname, 'index.html'),
-                protocol: 'file:',
-                slashes: true
-            })
-        );
+      url.format({
+          pathname: path.join(__dirname, 'index.html'),
+          protocol: 'file:',
+          slashes: true
+      })
+    );
     }
 
     if (process.env.NODE_ENV !== 'production') {
-        // Open DevTools, see https://github.com/electron/electron/issues/12438 for why we wait for dom-ready
+    // Open DevTools, see https://github.com/electron/electron/issues/12438 for why we wait for dom-ready
         win.webContents.once('dom-ready', () => {
             win!.webContents.openDevTools();
         });

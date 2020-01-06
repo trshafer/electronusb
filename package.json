@@ -19,7 +19,7 @@
     "pack": "npm run build && electron-builder --dir",
     "dist": "npm run build && electron-builder",
     "rebuild": "electron-rebuild",
-    "electron-rebuild": "electron-rebuild",
+    "electron-rebuild": "electron-rebuild --force",
     "postinstall": "electron-builder install-app-deps"
   },
   "engines": {
@@ -60,6 +60,7 @@
   "build": {
     "productName": "ProductName",
     "appId": "org.your.productname",
+    "npmRebuild": true,
     "mac": {
       "category": "your.app.category.type"
     },
@@ -106,6 +107,7 @@
     "@types/react-hot-loader": "^4.1.0",
     "@types/react-redux": "^7.0.9",
     "@types/react-test-renderer": "^16.8.1",
+    "@types/usb": "^1.5.1",
     "@types/webdriverio": "^4.8.7",
     "@types/webpack-env": "^1.13.3",
     "babel-loader": "^8.0.6",
@@ -149,6 +151,7 @@
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "usb": "^1.6.2"
   }
 }

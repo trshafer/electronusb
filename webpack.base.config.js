@@ -19,6 +19,7 @@ module.exports = {
   plugins: [],
   externals: {
     // https://github.com/node-hid/node-hid#electron-projects-using-node-hid
-    "node-hid": 'commonjs node-hid'
+    "node-hid": 'commonjs node-hid',
+    "usb": 'commonjs usb'
   }
 };
