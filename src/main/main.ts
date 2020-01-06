@@ -2,6 +2,11 @@ import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
+import * as HID from 'node-hid';
+
+console.log('HELLO1');
+console.log(HID.devices());
+
 let win: BrowserWindow | null;
 
 const installExtensions = async () => {
@@ -19,7 +24,13 @@ const createWindow = async () => {
         await installExtensions();
     }
 
-    win = new BrowserWindow({ width: 800, height: 600 });
+    win = new BrowserWindow({
+        width: 800,
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
 
     if (process.env.NODE_ENV !== 'production') {
         process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1';
