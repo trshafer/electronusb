@@ -16,7 +16,7 @@ const createUSBDeviceRow: React.FunctionComponent<USB.Device> = (device, index) 
     </tr>
 );
 
-export const USBDevices: React.FunctionComponent<ListProps> = ({ devices }) => (
+export const ListDevices: React.FunctionComponent<ListProps> = ({ devices }) => (
     <div>
         <h2>USB Devices</h2>
         <Table bordered={true} hover={true}>

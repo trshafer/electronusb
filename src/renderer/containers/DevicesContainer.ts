@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import * as USB from 'usb';
+import { Dispatch } from 'redux';
 
 import { Devices } from '../components/Devices';
 import { RootState } from '../reducers';
 import { DevicesAction, updateDevices } from '../actions/devicesActions';
 
 const mapStateToProps = (state: RootState) => ({
-    devices: state.usb.devices,
     hasFetched: state.usb.hasFetched
 });
 

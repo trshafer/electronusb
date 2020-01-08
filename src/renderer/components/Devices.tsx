@@ -1,11 +1,10 @@
 import * as React from 'react';
 
 import * as USB from 'usb';
-import { USBDevices } from './ListDevices';
+import { ListDevicesContainer } from '../containers/ListDevicesContainer';
 
 interface Props {
     readonly hasFetched: boolean;
-    readonly devices: ReadonlyArray<Readonly<USB.Device>>;
     readonly updateDevices: (devices: ReadonlyArray<Readonly<USB.Device>>) => void;
 }
 
@@ -31,7 +30,7 @@ export class Devices extends React.Component<Props> {
     render() {
         return (
             <div>
-                <USBDevices devices={this.props.devices} />
+                <ListDevicesContainer />
             </div>
         );
     }
