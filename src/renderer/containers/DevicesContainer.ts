@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import * as USB from 'usb';
 
 import { Devices } from '../components/Devices';
 import { RootState } from '../reducers';
@@ -10,7 +11,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<DevicesAction>) => ({
-    updateDevices: (devices: string) => dispatch(updateDevices(devices))
+    updateDevices: (devices: ReadonlyArray<Readonly<USB.Device>>) =>
+        dispatch(updateDevices(devices))
 });
 
 export const DevicesContainer = connect(mapStateToProps, mapDispatchToProps)(Devices);
