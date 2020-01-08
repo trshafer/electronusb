@@ -57,6 +57,9 @@ const createWindow = async () => {
     });
 };
 
+// https://github.com/electron/electron/issues/18397
+app.allowRendererProcessReuse = false;
+
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
