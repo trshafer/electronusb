@@ -1,73 +1,41 @@
 import * as React from 'react';
-import Table from 'react-bootstrap/Table';
 
-import * as HID from 'node-hid';
 import * as USB from 'usb';
+import { USBDevices } from './ListDevices';
 
-export interface Props {}
+interface Props {
+    readonly hasFetched: boolean;
+    readonly devices: ReadonlyArray<Readonly<USB.Device>>;
+    readonly updateDevices: (devices: ReadonlyArray<Readonly<USB.Device>>) => void;
+}
 
-const usbDevices = USB.getDeviceList();
-const devices = HID.devices();
+export class Devices extends React.Component<Props> {
+    private readonly updateUSB = () => {
+        this.props.updateDevices(USB.getDeviceList());
+    };
 
-const createHIDDeviceRow: React.FunctionComponent<HID.Device> = (device, index) => (
-    <tr key={index}>
-        <td>{device.vendorId}</td>
-        <td>{device.productId}</td>
-        <td>{device.product}</td>
-        <td>{device.manufacturer}</td>
-        <td>{device.serialNumber}</td>
-        <td>{device.path}</td>
-    </tr>
-);
+    componentDidMount() {
+        if (!this.props.hasFetched) {
+            console.log('fetching devices');
+            this.updateUSB();
+            USB.on('attach', this.updateUSB);
+            USB.on('detach', this.updateUSB);
+        }
+    }
 
-const createUSBDeviceRow: React.FunctionComponent<USB.Device> = (device, index) => (
-    <tr key={index}>
-        <td>{device.busNumber}</td>
-        <td>{device.deviceAddress}</td>
-        <td>{device.portNumbers}</td>
-        <td>{JSON.stringify(device.deviceDescriptor)}</td>
-    </tr>
-);
+    componentWillUnmount() {
+        USB.removeListener('attach', this.updateUSB);
+        USB.removeListener('detach', this.updateUSB);
+    }
 
-const USBDevices: React.FunctionComponent<Props> = () => (
-    <div>
-        <h2>USB Devices</h2>
-        <Table bordered={true} hover={true}>
-            <thead>
-                <tr>
-                    <th>BusNumber</th>
-                    <th>DeviceAddress</th>
-                    <th>PortNumbers</th>
-                    <th>DeviceDescriptor</th>
-                </tr>
-            </thead>
-            <tbody>{usbDevices.map(createUSBDeviceRow, this)}</tbody>
-        </Table>
-    </div>
-);
+    render() {
+        return (
+            <div>
+                <USBDevices devices={this.props.devices} />
+            </div>
+        );
+    }
+}
 
-const HIDDevices: React.FunctionComponent<Props> = () => (
-    <div>
-        <h2>HID Devices</h2>
-        <Table bordered={true} hover={true}>
-            <thead>
-                <tr>
-                    <th>VendorId</th>
-                    <th>ProductId</th>
-                    <th>Product</th>
-                    <th>Manufacturer</th>
-                    <th>SerialNumber</th>
-                    <th>Path</th>
-                </tr>
-            </thead>
-            <tbody>{devices.map(createHIDDeviceRow, this)}</tbody>
-        </Table>
-    </div>
-);
-
-export const Devices: React.FunctionComponent<Props> = () => (
-    <div>
-        <HIDDevices />
-        <USBDevices />
-    </div>
-);
+// export const Devices: React.FunctionComponent<Props> = ({ devices, updateDevices }) => (
+// );
